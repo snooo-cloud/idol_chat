@@ -155,6 +155,40 @@ setMessages((prev) => [...prev, fanMessage]);
 
 }
 }
+
+function resetBubble() {
+  localStorage.removeItem("bubbleMessages");
+  localStorage.removeItem("bubbleScreen");
+  localStorage.removeItem("idolName");
+  localStorage.removeItem("fanName");
+  localStorage.removeItem("fanStyle");
+  localStorage.removeItem("idolProfile");
+
+  setIdolName("しおん");
+  setFanName("ENGENE");
+  setFanStyle("限界ファンっぽく、かわいく短く返信する。");
+  setIdolProfile("KPOPアイドル。忙しいけどファン想いで優しい。");
+
+  setMessages([
+    {
+      sender: "idol",
+      text: "なにしてるの",
+      readCount: 48321,
+    },
+    {
+      sender: "idol",
+      text: "今宿舎で休んでるよ",
+      readCount: 52104,
+    },
+    {
+      sender: "fan",
+      text: "おつかれさま🥺",
+    },
+  ]);
+
+  setScreen("settings");
+}
+
     return (
     <main className="min-h-screen bg-pink-100 flex items-center justify-center p-4">
       <div className="w-full max-w-md bg-white rounded-3xl shadow-xl overflow-hidden">
@@ -220,6 +254,12 @@ setMessages((prev) => [...prev, fanMessage]);
             >
               トークを始める
             </button>
+            <button
+  className="w-full border border-pink-300 text-pink-400 py-3 rounded-full mt-3"
+  onClick={resetBubble}
+>
+  リセット
+</button>
           </div>
         ) : (
           <div>
