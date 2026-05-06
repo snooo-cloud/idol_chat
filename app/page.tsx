@@ -5,6 +5,7 @@ import { useState } from "react";
 type Message = {
   sender: "idol" | "fan";
   text: string;
+  readCount?: number;
 };
 
 const sleep = (ms: number) =>
@@ -37,11 +38,29 @@ export default function Home() {
     const idolText = input;
 
     const idolMessage: Message = {
-      sender: "idol",
-      text: idolText,
-    };
+  sender: "idol",
+  text: idolText,
+  readCount: 0,
+};
 
     setMessages((prev) => [...prev, idolMessage]);
+    let currentReads = 0;
+
+const interval = setInterval(() => {
+  currentReads += Math.floor(Math.random() * 5000);
+
+  setMessages((prev) =>
+    prev.map((msg, index) =>
+      index === prev.length - 1
+        ? { ...msg, readCount: currentReads }
+        : msg
+    )
+  );
+
+  if (currentReads > 120000) {
+    clearInterval(interval);
+  }
+}, 800);
     setInput("");
 
     const res = await fetch("/api/fan", {
@@ -70,7 +89,8 @@ for (let i = 0; i < fanReplies.length; i++) {
     text: fanReplies[i],
   };
 
-  setMessages((prev) => [...prev, fanMessage]);
+setMessages((prev) => [...prev, fanMessage]);
+
 }
 }
   return (
@@ -149,6 +169,11 @@ for (let i = 0; i < fanReplies.length; i++) {
                   }
                 >
                   {message.text}
+                  {message.sender === "idol" && (
+  <div className="text-[11px] text-gray-400 mt-1 text-right">
+    읽음 {message.readCount?.toLocaleString() ?? 0}
+  </div>
+)}
                 </div>
               ))}
             </div>
