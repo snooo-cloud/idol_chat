@@ -60,10 +60,10 @@ export default function Home() {
 
     const data = await res.json();
 
-    const fanReplies: string[] = data.replies;
+const fanReplies: string[] = data.replies;
 
 for (let i = 0; i < fanReplies.length; i++) {
-  await sleep(1000 + i * 1500);
+  await sleep(500 + i * 700);
 
   const fanMessage: Message = {
     sender: "fan",
@@ -175,5 +175,4 @@ for (let i = 0; i < fanReplies.length; i++) {
         )}
       </div>
     </main>
-  );
-}
+  )
