@@ -127,7 +127,7 @@ setMessages((prev) => [...prev, fanMessage]);
 
 }
 }
-  return (
+    return (
     <main className="min-h-screen bg-pink-100 flex items-center justify-center p-4">
       <div className="w-full max-w-md bg-white rounded-3xl shadow-xl overflow-hidden">
         {screen === "settings" ? (
@@ -140,34 +140,50 @@ setMessages((prev) => [...prev, fanMessage]);
               アイドルとファンの設定を決めてね
             </p>
 
-            <div className="space-y-3">
-              <input
-                className="w-full border border-gray-300 rounded-full px-4 py-3 outline-none"
-                value={idolName}
-                onChange={(e) => setIdolName(e.target.value)}
-                placeholder="アイドル名"
-              />
+            <div className="space-y-4">
+              <div>
+                <p className="text-sm text-gray-500 mb-2 ml-1">アイドル名</p>
+                <input
+                  className="w-full border border-gray-300 rounded-full px-4 py-3 outline-none"
+                  value={idolName}
+                  onChange={(e) => setIdolName(e.target.value)}
+                  placeholder="例：しおん"
+                />
+              </div>
 
-              <input
-                className="w-full border border-gray-300 rounded-full px-4 py-3 outline-none"
-                value={fanName}
-                onChange={(e) => setFanName(e.target.value)}
-                placeholder="ファン名 例：ENGENE"
-              />
+              <div>
+                <p className="text-sm text-gray-500 mb-2 ml-1">ファンネーム</p>
+                <input
+                  className="w-full border border-gray-300 rounded-full px-4 py-3 outline-none"
+                  value={fanName}
+                  onChange={(e) => setFanName(e.target.value)}
+                  placeholder="例：ENGENE"
+                />
+              </div>
 
-              <textarea
-                className="w-full border border-gray-300 rounded-2xl px-4 py-3 outline-none h-28"
-                value={idolProfile}
-                onChange={(e) => setIdolProfile(e.target.value)}
-                placeholder="アイドル本人の設定"
-              />
+              <div>
+                <p className="text-sm text-gray-500 mb-2 ml-1">
+                  アイドルプロフィール
+                </p>
+                <textarea
+                  className="w-full border border-gray-300 rounded-2xl px-4 py-3 outline-none h-28"
+                  value={idolProfile}
+                  onChange={(e) => setIdolProfile(e.target.value)}
+                  placeholder="ツンデレだけどファン想い"
+                />
+              </div>
 
-              <textarea
-                className="w-full border border-gray-300 rounded-2xl px-4 py-3 outline-none h-28"
-                value={fanStyle}
-                onChange={(e) => setFanStyle(e.target.value)}
-                placeholder="ファンの返信の雰囲気"
-              />
+              <div>
+                <p className="text-sm text-gray-500 mb-2 ml-1">
+                  ファン返信の雰囲気
+                </p>
+                <textarea
+                  className="w-full border border-gray-300 rounded-2xl px-4 py-3 outline-none h-28"
+                  value={fanStyle}
+                  onChange={(e) => setFanStyle(e.target.value)}
+                  placeholder="限界オタクっぽく短文で返信"
+                />
+              </div>
             </div>
 
             <button
@@ -180,10 +196,7 @@ setMessages((prev) => [...prev, fanMessage]);
         ) : (
           <div>
             <div className="bg-pink-400 text-white p-4 flex items-center justify-between">
-              <button
-                className="text-sm"
-                onClick={() => setScreen("settings")}
-              >
+              <button className="text-sm" onClick={() => setScreen("settings")}>
                 設定
               </button>
 
@@ -203,11 +216,12 @@ setMessages((prev) => [...prev, fanMessage]);
                   }
                 >
                   {message.text}
+
                   {message.sender === "idol" && (
-  <div className="text-[11px] text-gray-400 mt-1 text-right">
-    읽음 {message.readCount?.toLocaleString() ?? 0}
-  </div>
-)}
+                    <div className="text-[11px] text-gray-400 mt-1 text-right">
+                      읽음 {message.readCount?.toLocaleString() ?? 0}
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
@@ -234,5 +248,5 @@ setMessages((prev) => [...prev, fanMessage]);
         )}
       </div>
     </main>
-  )
+  );
 }
