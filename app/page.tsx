@@ -176,3 +176,4 @@ for (let i = 0; i < fanReplies.length; i++) {
       </div>
     </main>
   )
+}
