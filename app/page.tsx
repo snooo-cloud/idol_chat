@@ -43,9 +43,16 @@ export default function Home() {
   },
 ]);
 useEffect(() => {
-  console.log("messages changed");
-}, [messages]);
+  const savedMessages = localStorage.getItem("bubbleMessages");
 
+  if (savedMessages) {
+    setMessages(JSON.parse(savedMessages));
+  }
+}, []);
+
+useEffect(() => {
+  localStorage.setItem("bubbleMessages", JSON.stringify(messages));
+}, [messages]);
   async function sendMessage() {
     if (!input.trim()) return;
 
