@@ -66,6 +66,34 @@ useEffect(() => {
   localStorage.setItem("bubbleScreen", screen);
 }, [screen]);
 
+useEffect(() => {
+  const savedIdolName = localStorage.getItem("idolName");
+  const savedFanName = localStorage.getItem("fanName");
+  const savedFanStyle = localStorage.getItem("fanStyle");
+  const savedIdolProfile = localStorage.getItem("idolProfile");
+
+  if (savedIdolName) setIdolName(savedIdolName);
+  if (savedFanName) setFanName(savedFanName);
+  if (savedFanStyle) setFanStyle(savedFanStyle);
+  if (savedIdolProfile) setIdolProfile(savedIdolProfile);
+}, []);
+
+useEffect(() => {
+  localStorage.setItem("idolName", idolName);
+}, [idolName]);
+
+useEffect(() => {
+  localStorage.setItem("fanName", fanName);
+}, [fanName]);
+
+useEffect(() => {
+  localStorage.setItem("fanStyle", fanStyle);
+}, [fanStyle]);
+
+useEffect(() => {
+  localStorage.setItem("idolProfile", idolProfile);
+}, [idolProfile]);
+
   async function sendMessage() {
     if (!input.trim()) return;
 
