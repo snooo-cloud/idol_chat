@@ -53,6 +53,19 @@ useEffect(() => {
 useEffect(() => {
   localStorage.setItem("bubbleMessages", JSON.stringify(messages));
 }, [messages]);
+
+useEffect(() => {
+  const savedScreen = localStorage.getItem("bubbleScreen");
+
+  if (savedScreen === "chat" || savedScreen === "settings") {
+    setScreen(savedScreen);
+  }
+}, []);
+
+useEffect(() => {
+  localStorage.setItem("bubbleScreen", screen);
+}, [screen]);
+
   async function sendMessage() {
     if (!input.trim()) return;
 
