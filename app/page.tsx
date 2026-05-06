@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 type Message = {
   sender: "idol" | "fan";
@@ -26,11 +26,25 @@ export default function Home() {
     "KPOPアイドル。忙しいけどファン想いで優しい。"
   );
 
-  const [messages, setMessages] = useState<Message[]>([
-    { sender: "idol", text: "なにしてるの" },
-    { sender: "idol", text: "僕は宿舎で休んでるよ" },
-    { sender: "fan", text: "おつかれさま🥺" },
-  ]);
+ const [messages, setMessages] = useState<Message[]>([
+  {
+    sender: "idol",
+    text: "なにしてるの",
+    readCount: 48321,
+  },
+  {
+    sender: "idol",
+    text: "僕は宿舎で休んでるよ",
+    readCount: 52104,
+  },
+  {
+    sender: "fan",
+    text: "おつかれさま🥺",
+  },
+]);
+useEffect(() => {
+  console.log("messages changed");
+}, [messages]);
 
   async function sendMessage() {
     if (!input.trim()) return;
