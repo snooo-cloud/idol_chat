@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type Message = {
   sender: "idol" | "fan";
@@ -25,6 +25,8 @@ export default function Home() {
   const [idolProfile, setIdolProfile] = useState(
     "KPOPアイドル。忙しいけどファン想いで優しい。"
   );
+
+  const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
  const [messages, setMessages] = useState<Message[]>([
   {
@@ -93,6 +95,12 @@ useEffect(() => {
 useEffect(() => {
   localStorage.setItem("idolProfile", idolProfile);
 }, [idolProfile]);
+
+useEffect(() => {
+  messagesEndRef.current?.scrollIntoView({
+    behavior: "smooth",
+  });
+}, [messages, screen]);
 
   async function sendMessage() {
     if (!input.trim()) return;
@@ -292,6 +300,9 @@ function resetBubble() {
                   )}
                 </div>
               ))}
+
+<div ref={messagesEndRef} />
+
             </div>
 
             <div className="flex gap-2 p-4 bg-white">
