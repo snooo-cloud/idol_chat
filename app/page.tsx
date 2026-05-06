@@ -7,6 +7,9 @@ type Message = {
   text: string;
 };
 
+const sleep = (ms: number) =>
+  new Promise((resolve) => setTimeout(resolve, ms));
+
 export default function Home() {
   const [screen, setScreen] = useState<"settings" | "chat">("settings");
 
@@ -59,14 +62,17 @@ export default function Home() {
 
     const fanReplies: string[] = data.replies;
 
-    const fanMessages: Message[] = fanReplies.map((reply) => ({
-      sender: "fan",
-      text: reply,
-    }));
+for (let i = 0; i < fanReplies.length; i++) {
+  await sleep(1000 + i * 1500);
 
-    setMessages((prev) => [...prev, ...fanMessages]);
-  }
+  const fanMessage: Message = {
+    sender: "fan",
+    text: fanReplies[i],
+  };
 
+  setMessages((prev) => [...prev, fanMessage]);
+}
+}
   return (
     <main className="min-h-screen bg-pink-100 flex items-center justify-center p-4">
       <div className="w-full max-w-md bg-white rounded-3xl shadow-xl overflow-hidden">
