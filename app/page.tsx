@@ -157,6 +157,7 @@ const interval = setInterval(() => {
   groupStyle: groupStyle,
   fanStyle: fanStyle,
   idolProfile: idolProfile,
+  recentMessages: messages.slice(-10),
 }),
     });
 

@@ -42,6 +42,7 @@ export async function POST(req: Request) {
       groupStyle,
       fanStyle,
       idolProfile,
+      recentMessages,
     } = await req.json();
 
     const wikiSummary = await getWikipediaSummary(groupStyle);
@@ -91,6 +92,12 @@ ${fanStyle}
 - 必ずJSON配列だけで返す
 - 説明文や前置きは絶対に書かない
 - 例: ["え、かわいいㅠㅠ", "今日もおつかれさま", "ちゃんと休んでね🥺"]
+
+直近の会話履歴:
+${JSON.stringify(recentMessages)}
+
+この会話履歴を見て、アイドルが前に話した内容や流れを踏まえて返信してください。
+ただし履歴を説明せず、自然なファン返信にしてください。
 
 アイドルの投稿:
 ${idolText}
