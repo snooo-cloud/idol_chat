@@ -18,6 +18,8 @@ export default function Home() {
   const [idolName, setIdolName] = useState("しおん");
   const [fanName, setFanName] = useState("ENGENE");
 
+  const [groupStyle, setGroupStyle] = useState("ENHYPENっぽい");
+
   const [fanStyle, setFanStyle] = useState(
     "限界ファンっぽく、かわいく短く返信する。"
   );
@@ -89,6 +91,16 @@ useEffect(() => {
 }, [fanName]);
 
 useEffect(() => {
+  const savedGroupStyle = localStorage.getItem("groupStyle");
+
+  if (savedGroupStyle) setGroupStyle(savedGroupStyle);
+}, []);
+
+useEffect(() => {
+  localStorage.setItem("groupStyle", groupStyle);
+}, [groupStyle]);
+
+useEffect(() => {
   localStorage.setItem("fanStyle", fanStyle);
 }, [fanStyle]);
 
@@ -139,12 +151,13 @@ const interval = setInterval(() => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        idolText: idolText,
-        idolName: idolName,
-        fanName: fanName,
-        fanStyle: fanStyle,
-        idolProfile: idolProfile,
-      }),
+  idolText: idolText,
+  idolName: idolName,
+  fanName: fanName,
+  groupStyle: groupStyle,
+  fanStyle: fanStyle,
+  idolProfile: idolProfile,
+}),
     });
 
     const data = await res.json();
@@ -171,9 +184,12 @@ function resetBubble() {
   localStorage.removeItem("fanName");
   localStorage.removeItem("fanStyle");
   localStorage.removeItem("idolProfile");
+localStorage.removeItem("groupStyle");
+localStorage.removeItem("groupStyle");
 
   setIdolName("しおん");
   setFanName("ENGENE");
+  setGroupStyle("ENHYPENっぽい");
   setFanStyle("限界ファンっぽく、かわいく短く返信する。");
   setIdolProfile("KPOPアイドル。忙しいけどファン想いで優しい。");
 
@@ -230,6 +246,19 @@ function resetBubble() {
                   placeholder="例：ENGENE"
                 />
               </div>
+
+<div>
+  <p className="text-sm text-gray-500 mb-2 ml-1">
+    所属グループ / コンセプト
+  </p>
+
+  <input
+    className="w-full border border-gray-300 rounded-full px-4 py-3 outline-none"
+    value={groupStyle}
+    onChange={(e) => setGroupStyle(e.target.value)}
+    placeholder="例：ENHYPENっぽい / NCTっぽい / 清楚系ソロアイドル"
+  />
+</div>
 
               <div>
                 <p className="text-sm text-gray-500 mb-2 ml-1">

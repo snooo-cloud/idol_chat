@@ -6,8 +6,14 @@ const client = new OpenAI({
 
 export async function POST(req: Request) {
   try {
-    const { idolText, idolName, fanName, fanStyle, idolProfile } =
-      await req.json();
+    const {
+  idolText,
+  idolName,
+  fanName,
+  groupStyle,
+  fanStyle,
+  idolProfile,
+} = await req.json();
 
     const response = await client.responses.create({
       model: "gpt-4.1-mini",
@@ -17,6 +23,11 @@ export async function POST(req: Request) {
 
 アイドル本人の設定:
 ${idolProfile}
+
+所属グループ / コンセプト:
+${groupStyle}
+
+この所属グループやコンセプトらしいBubble文化、ファンダムの空気感、話題、距離感を強く反映してください。
 
 ファンの返信の雰囲気:
 ${fanStyle}
